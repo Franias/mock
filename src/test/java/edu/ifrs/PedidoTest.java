@@ -98,6 +98,21 @@ public class PedidoTest {
         assertEquals(180,valorTotal);
     }
 
+    @Test
+    public void calcularValorTotalApenasUmaVez(){
+        List<ItemPedido> itens = new ArrayList<>();
+        itens.add(new ItemPedido(50));
+        itens.add(new ItemPedido(50));
+
+        pedido = new Pedido(itens, descontoService);
+
+        when(descontoService.calcularDesconto(100)).thenReturn(10.0);
+
+        double valorTotal = pedido.calcularValorTotal();
+
+        verify(descontoService, times(1)).calcularDesconto(100);
+
+    }
 
 
 }
