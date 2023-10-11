@@ -89,13 +89,13 @@ public class PedidoTest {
         itens.add(new ItemPedido(100));
         itens.add(new ItemPedido(100));
 
-        when(descontoService.calcularDesconto(anyDouble())).thenReturn(90.0);
+        when(descontoService.calcularDesconto(anyDouble())).thenReturn(10.0,10.0);
 
-        pedido = new Pedido(itens, 10.0);
+        pedido = new Pedido(itens, descontoService);
 
-        double valorTotal = pedido.calcularValorTotalPorItem();
+        double valorTotal = pedido.calcularValorTotalDescontoPorItem();
         
-        assertEquals(00,valorTotal);
+        assertEquals(180,valorTotal);
     }
 
 

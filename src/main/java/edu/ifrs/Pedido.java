@@ -46,9 +46,21 @@ public class Pedido {
     }
 
     public double calcularValorTotalPorItem(ItemPedido itemPedido) {
-        desconto = descontoService.calcularDesconto(itemPedido.getSubtotal());
+        
+       double desconto = descontoService.calcularDesconto(itemPedido.getSubtotal());
 
 
-        return valorTotal - desconto;
+        return itemPedido.getSubtotal() - desconto;
+    }
+
+    public double calcularValorTotalDescontoPorItem() {
+        
+       double valorTotal = 0.0;
+       for (ItemPedido item : itens) {
+            valorTotal += calcularValorTotalPorItem(item);
+        }
+
+
+        return valorTotal;
     }
 }
